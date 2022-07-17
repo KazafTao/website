@@ -1,0 +1,44 @@
+<!--整体布局模板-->
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <!--    tab页标题-->
+    <title>{% block title %}{% endblock %}</title>
+    <!--    引用bootstrap来美化前端页面-->
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap/css/bootstrap.css' %}">
+    {% block css %}{% endblock %}
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="#">MyWebSite</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+            </ul>
+            <ul class="d-flex navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">登录</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">注册</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.js' %}"></script>
+{% block js %}{% endblock %}
+</body>
+</html>
