@@ -28,10 +28,17 @@
             <form method="post">
                 {% csrf_token %}
                 {% for field in form %}
+                {% if field.label == '验证码' %}
+                <div class="mb-3">
+                    <label class="form-label">{{ field.label_tag }}</label>
+                    {{ field }}
+                </div>
+                {% else %}
                 <div class="form-floating mb-3">
                     {{ field }}
                     <label>{{field.label_tag }}</label>
                 </div>
+                {% endif %}
                 <span style="color:red;">{{ field.errors.0 }}</span>
                 {% endfor %}
                 <button type="submit" class="btn btn-primary">提交</button>
@@ -39,6 +46,8 @@
         </div>
     </div>
 </div>
+<script src="{% static 'plugins/jquery/jquery-3.6.0.min.js' %}"></script>
 <script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.js' %}"></script>
+<script src="{% static 'plugins/captcha/refresh.js' %}"></script>
 </body>
 </html>

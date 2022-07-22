@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 from captcha.fields import CaptchaField
 
 from main.forms.common import BootstrapModelForm, BootstrapForm
+from main.models import Profile
 
 
 class RegisterForm(BootstrapModelForm):
@@ -13,11 +14,13 @@ class RegisterForm(BootstrapModelForm):
         # 继承django自带的user模型
         model = User
         # 只显示username,password两个字段
-        fields = ['username', 'password', 'confirm_password', 'vcode']
+        # fields = ['username', 'password', 'confirm_password', 'vcode', 'mobile']
+        fields = ['username', 'password', 'confirm_password', 'mobile']
 
     password = forms.CharField(label='密码', widget=forms.PasswordInput(render_value=True), max_length=64)
     confirm_password = forms.CharField(label='确认密码', widget=forms.PasswordInput(render_value=True), max_length=64)
-    vcode = CaptchaField(label='验证码')
+    # vcode = CaptchaField(label='验证码')
+    mobile = forms.CharField(label='手机号', max_length=11)
 
     def clean_confirm_password(self):
         """确保两次密码一致"""
@@ -25,6 +28,12 @@ class RegisterForm(BootstrapModelForm):
             return self.cleaned_data["confirm_password"]
         else:
             raise ValidationError("两次密码不一致")
+
+
+class ProfileForm(BootstrapForm):
+    class Meta:
+        model = Profile
+        fields = ['mobile']
 
 
 class LoginForm(BootstrapForm):
