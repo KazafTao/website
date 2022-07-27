@@ -106,6 +106,12 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# 将media下的目录也列为静态文件
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'main/static/'),
+    os.path.join(BASE_DIR, 'main/static/media/avatar/'),
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
@@ -116,3 +122,7 @@ LOGIN_URL = '/login/'
 # 验证码相关
 CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
 CAPTCHA_TIMEOUT = 1
+
+# 图片上传相关
+MEDIA_ROOT = os.path.join(BASE_DIR, 'main/static/media/').replace('\\', '/')
+MEDIA_URL = "/media/"

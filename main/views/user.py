@@ -1,10 +1,14 @@
-from django.shortcuts import redirect, render
+import os
+import pathlib
+
+from django.shortcuts import redirect, render, resolve_url, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.conf import settings
 
-from main.forms.user import RegisterForm, LoginForm, ProfileForm
+from main.forms.user import RegisterForm, LoginForm, UserInfoForm
 
 
 def register(request):
@@ -19,16 +23,14 @@ def register(request):
         return render(request, 'user/register.html', context)
     form = RegisterForm(data=request.POST)
     if form.is_valid():
-        # create_user函数没有confirm_password和vcode参数
-        form.cleaned_data.pop('confirm_password')
-        mobile = form.cleaned_data.pop('mobile')
-        # form.cleaned_data.pop('vcode')
         # 需要用django自带的create_user来创建用户，不能直接用form.save()，否则密码为明文
-        user = User.objects.create_user(**form.cleaned_data)
+        user = User.objects.create_user(username=form.cleaned_data["username"], password=form.cleaned_data["password"])
         # 添加用户手机
-        user.profile.mobile = mobile
+        print(form.cleaned_data)
+        user.profile.mobile = form.cleaned_data["mobile"]
+        user.profile.gender = form.cleaned_data["gender"]
         user.save()
-        return redirect('/login/')
+        return redirect(resolve_url(user_login))
     # 校验不通过的重新渲染注册页面，包含将之前输入的表单数据
     # 取消验证码
     print(form.errors)
@@ -44,7 +46,7 @@ def user_login(request):
         user = authenticate(**form.cleaned_data)
         if user:
             login(request, user)
-            return redirect('/')
+            return redirect(resolve_url(index))
         else:
             messages.error(request, '用户名或密码错误')
             return render(request, 'user/login.html', {'form': form})
@@ -54,10 +56,37 @@ def user_login(request):
 def user_logout(request):
     """用户注销"""
     logout(request)
-    return redirect('/')
+    return redirect(resolve_url(index))
 
 
-# @login_required()
+@login_required()
+def user_info(request):
+    """用户主页"""
+    profile = request.user.profile
+    if request.method == "GET":
+        context = {
+            'form': UserInfoForm(instance=profile)
+        }
+        return render(request, 'user/info.html', context)
+    form = UserInfoForm(data=request.POST, instance=profile)
+    # if form.is_valid():
+    profile.mobile = form.data["mobile"]
+    profile.gender = form.data["gender"]
+    # 图片并不在form.data中，而是在request.FILES中
+    file = request.FILES.get("avatar")
+    # 将上传的文件保存到服务器上
+    file_path = os.path.join(settings.MEDIA_ROOT, '', 'avatar/', file.name)
+    with open(file_path, mode='wb') as f:
+        for chunk in file.chunks():
+            f.write(chunk)
+    profile.avatar = file.name
+    request.user.save()
+    return HttpResponse("保存成功")
+    # else:
+    #     print("未校验")
+    #     return render(request, 'user/info.html', {'form': form})
+
+
 def index(request):
-    # return render(request, 'layout.html')
-    return render(request, 'user/test.html')
+    return render(request, 'layout.html')
+    # return render(request, 'user/test.html')

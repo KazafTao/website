@@ -8,7 +8,15 @@ class Profile(models.Model):
     """User表额外信息"""
     # 使用一对一链接来扩展User模型
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    mobile = models.CharField(verbose_name="手机号", unique=True, max_length=11)
+    mobile = models.CharField(verbose_name="手机号", max_length=11)
+    gender_choice = (
+        (1, '男'),
+        (2, '女'),
+        (3, '保密'),
+    )
+    gender = models.SmallIntegerField(verbose_name="性别", choices=gender_choice, default=3)
+    avatar = models.ImageField(verbose_name="头像路径", upload_to='avatar', default='avatar/avatar_default.png')
+    background = models.ImageField(verbose_name="背景路径", upload_to='background', default='background/bg_default.png')
 
     def __str__(self):
         return f"手机号：{self.mobile}"
