@@ -4,8 +4,5 @@
 
 #user_avatar {
     width: 300px;
-}
-
-#avatar_right {
-    margin: auto 0
+    height: 300px;
 }

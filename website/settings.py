@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
+    'question.apps.QuestionConfig',
     'captcha',
 ]
 
@@ -38,6 +39,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# 网站url根目录
 ROOT_URLCONF = 'website.urls'
 
 TEMPLATES = [
@@ -95,7 +97,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'zh-hans'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -109,6 +111,7 @@ STATIC_URL = 'static/'
 # 将media下的目录也列为静态文件
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'main/static/'),
+    # os.path.join(BASE_DIR, 'question/static/'),
     os.path.join(BASE_DIR, 'main/static/media/avatar/'),
 ]
 

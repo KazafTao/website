@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block title %} 主页 {% endblock %}
+{% block css%}
+<link rel="stylesheet" href="{% static 'question/css/index.css' %}"> {% endblock %}
+{% block content %}
+<div class="container" id="index_content">
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+        {% for question in question_list %}
+        <div class="accordion-item question">
+            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                        aria-controls="panelsStayOpen-collapseOne">
+                    {{ question.title }}
+                </button>
+            </h2>
+            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+                 aria-labelledby="panelsStayOpen-headingOne">
+                <div class="accordion-body">
+                    <a href="{% url 'question:detail' question.id %}">{{ question.answer_set.all.first.detail }}</a>
+                </div>
+            </div>
+            <div class="toolbar">
+                <button type="button" class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                        <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                    </svg>
+                    赞同
+                </button>
+                <button class="btn btn-primary">
+                    <!--                点踩-->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-caret-down-fill " viewBox="0 0 16 16">
+                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                    </svg>
+                </button>
+                <span class="cls">
+                <button type="button" class="btn btn-light">评论</button>
+                <button type="button" class="btn btn-light">分享</button>
+                <button type="button" class="btn btn-light">收藏</button>
+            </span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

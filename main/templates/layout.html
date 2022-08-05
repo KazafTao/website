@@ -21,12 +21,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link" aria-current="page" data-bs-toggle="modal" data-bs-target="#askModal">提问</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
                 </li>
             </ul>
+            <form class="d-flex" role="search">
+                <input class="form-control me-3" type="search" placeholder="搜索" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Go</button>
+            </form>
             <ul class="d-flex navbar-nav mb-2 mb-lg-0">
                 <!--                未登录则显示登录注册-->
                 {% if request.user.is_anonymous %}
@@ -66,6 +70,26 @@
     </div>
     {% endfor %}
     {% endif %}
+</div>
+<div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="askModal" tabindex="-1" aria-labelledby="askModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form method="post" action="{% url 'question:ask' %}">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        <label for="question_text" class="form-label">请写下你的问题</label>
+                        <input type="text" class="form-control" id="question_text" name="question_text">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                        <button type="submit" class="btn btn-primary">发布问题</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 {% block content %}{% endblock %}
 <script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.js' %}"></script>

@@ -1,0 +1,51 @@
+.question_header {
+    margin: 10px auto;
+}
+
+#questioner_avatar {
+    width: 28px;
+    height: 28px;
+    margin: 0 5px;
+}
+
+#questioner_name {
+    color: #175199;
+}
+
+.question_body h1 {
+    margin: 15px auto;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.question_footer {
+    margin: 10px auto;
+}
+
+.question_footer button {
+    margin: 5px ;
+}
+
+#agree_question {
+    width: 20px;
+    height: 20px;
+}
+
+.answer {
+    margin: 20px auto;
+}
+
+#anwser_avatar {
+    width:40px;
+    height:40px;
+    margin: auto 20px;
+}
+
+.answer_header p {
+    margin: 10px auto;
+    color: gray;
+}
+
+.answer_body {
+    margin: 10px auto;
+}

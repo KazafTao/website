@@ -8,6 +8,8 @@ class Profile(models.Model):
     """User表额外信息"""
     # 使用一对一链接来扩展User模型
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    # 引用昵称解决User模型username不支持中文的问题
+    nickname = models.CharField(verbose_name="昵称", max_length=60, blank=True, null=True)
     mobile = models.CharField(verbose_name="手机号", max_length=11)
     gender_choice = (
         (1, '男'),
@@ -19,7 +21,7 @@ class Profile(models.Model):
     background = models.ImageField(verbose_name="背景路径", upload_to='background', default='background/bg_default.png')
 
     def __str__(self):
-        return f"手机号：{self.mobile}"
+        return f"{self.nickname if self.nickname else self.user.username}"
 
 
 # 当User创建的实例的时候，profile自动创建实例,但是不会填充数据

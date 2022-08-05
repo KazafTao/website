@@ -1,0 +1,16 @@
+#index_content {
+    margin-top: 20px;
+}
+
+div.question {
+    margin-top: 10px;
+}
+
+div.toolbar {
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.toolbar .cls button {
+    margin-left: 20px;
+}

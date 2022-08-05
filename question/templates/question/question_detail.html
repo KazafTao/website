@@ -1,0 +1,69 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block title %}{{ question.title }}{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'question/css/detail.css' %}"> {% endblock %}
+{% block content %}
+<div class="container">
+    <div class="question_header">
+        <img src="{% static question.user.profile.avatar %}" alt="" id="questioner_avatar">
+        <span id="questioner_name"> {% if question.user.profile.nickname %}
+        {{ question.user.profile.nickname }}
+        {% else %}
+        {{ question.user.username }}
+        {% endif %}</span>
+    </div>
+    <div class="question_body">
+        <h1>{{ question.title }}</h1>
+    </div>
+    <div class="question_footer">
+        <button type="button" class="btn btn-primary">关注问题</button>
+        <button type="button" class="btn btn-outline-secondary">写回答</button>
+        <button type="button" class="btn btn-light"><img src="{% static 'question/img/agree.jfif' %}" alt=""
+                                                         id="agree_question">好问题
+        </button>
+        <button type="button" class="btn btn-light">{{ question.comment_set.count }}条评论</button>
+    </div>
+    <div class="answer_list">
+        {% for answer in question.answer_set.all %}
+        <div class="answer">
+            <div class="answer_header">
+                <img src="{% static answer.user.profile.avatar %}" alt="" id="anwser_avatar">
+                {% if answer.user.profile.nickname %}
+                {{ answer.user.profile.nickname }}
+                {% else %}
+                {{ answer.user.username }}
+                {% endif %}
+                <p>{{ answer.agrees }}人赞同了该回答</p>
+                <p>发布于{{answer.pub_date}},编辑于{{answer.edit_date}}</p>
+            </div>
+            <div class="answer_body">
+                <!--                使用过滤器将回车自动转换为br标签-->
+                {{ answer.detail|linebreaksbr }}
+            </div>
+            <div class="answer_footer">
+                <button type="button" class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                        <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                    </svg>
+                    赞同 {{ answer.agrees }}
+                </button>
+                <button class="btn btn-primary">
+                    <!--                点踩-->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-caret-down-fill " viewBox="0 0 16 16">
+                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                    </svg>
+                </button>
+                <span class="cls">
+                <button type="button" class="btn btn-light">{{ answer.comment_set.count }}条评论</button>
+                <button type="button" class="btn btn-light">分享</button>
+                <button type="button" class="btn btn-light">收藏</button>
+            </span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
