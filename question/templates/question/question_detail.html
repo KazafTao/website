@@ -39,7 +39,7 @@
             </div>
             <div class="answer_body">
                 <!--                使用过滤器将回车自动转换为br标签-->
-                {{ answer.detail|linebreaksbr }}
+                {{ answer.detail|safe|linebreaksbr }}
             </div>
             <div class="answer_footer">
                 <button type="button" class="btn btn-primary">

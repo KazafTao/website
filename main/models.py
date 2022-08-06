@@ -19,6 +19,8 @@ class Profile(models.Model):
     gender = models.SmallIntegerField(verbose_name="性别", choices=gender_choice, default=3)
     avatar = models.ImageField(verbose_name="头像路径", upload_to='avatar', default='avatar/avatar_default.png')
     background = models.ImageField(verbose_name="背景路径", upload_to='background', default='background/bg_default.png')
+    # 使用序列化来存储数组
+    agreed_answer = models.TextField(verbose_name="赞同的回答", blank=True, null=True)
 
     def __str__(self):
         return f"{self.nickname if self.nickname else self.user.username}"

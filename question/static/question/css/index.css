@@ -6,11 +6,14 @@ div.question {
     margin-top: 10px;
 }
 
-div.toolbar {
+.question_header {
+    background:white
+}
+/*div.toolbar {
     margin-left: 20px;
     margin-bottom: 10px;
-}
+}*/
 
-.toolbar .cls button {
+/*.toolbar .cls button {
     margin-left: 20px;
-}
+}*/

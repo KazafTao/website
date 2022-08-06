@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'question.apps.QuestionConfig',
     'captcha',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
