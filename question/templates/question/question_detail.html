@@ -2,6 +2,7 @@
 {% load static %}
 {% block title %}{{ question.title }}{% endblock %}
 {% block css %}
+<link rel="stylesheet" href="{% static 'question/css/question.css' %}">
 <link rel="stylesheet" href="{% static 'question/css/detail.css' %}"> {% endblock %}
 {% block content %}
 <div class="container">
@@ -18,7 +19,9 @@
     </div>
     <div class="question_footer">
         <button type="button" class="btn btn-primary">关注问题</button>
-        <button type="button" class="btn btn-outline-secondary">写回答</button>
+        <a href="{% url 'question:answer' question.id %}">
+            <button type="button" class="btn btn-outline-secondary">写回答</button>
+        </a>
         <button type="button" class="btn btn-light"><img src="{% static 'question/img/agree.jfif' %}" alt=""
                                                          id="agree_question">好问题
         </button>

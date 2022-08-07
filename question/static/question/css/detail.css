@@ -1,17 +1,3 @@
-.question_header {
-    margin: 10px auto;
-}
-
-#questioner_avatar {
-    width: 28px;
-    height: 28px;
-    margin: 0 5px;
-}
-
-#questioner_name {
-    color: #175199;
-}
-
 .question_body h1 {
     margin: 15px auto;
     font-size: 22px;
@@ -20,6 +6,11 @@
 
 .question_footer {
     margin: 10px auto;
+}
+
+.question_footer a {
+    /* 取消a标签下的按钮的下划线 */
+    text-decoration:none;
 }
 
 .question_footer button {

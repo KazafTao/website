@@ -1,0 +1,13 @@
+.question_header {
+    margin: 10px auto;
+}
+
+#questioner_avatar {
+    width: 28px;
+    height: 28px;
+    margin: 0 5px;
+}
+
+#questioner_name {
+    color: #175199;
+}
