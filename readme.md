@@ -18,7 +18,17 @@
 
 ![image-20220806183422660](https://s2.loli.net/2022/08/06/bHEMohc7xlLBm5N.png)
 
+写回答
+
+![image-20220807150347344](https://s2.loli.net/2022/08/07/9f2bA5yoYi7vTIQ.png)
+
 后台管理内容
 
 ![image-20220806183528908](https://s2.loli.net/2022/08/06/sylhWMr7n4NJix6.png)
+
+# 数据库设计
+
+## ER图
+
+![image-20220807102925088](https://s2.loli.net/2022/08/07/eKWAOdpoFmzt1I2.png)
 
