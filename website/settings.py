@@ -108,6 +108,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT='static/'
 
 # 将media下的目录也列为静态文件
 STATICFILES_DIRS = [

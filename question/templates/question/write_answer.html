@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block title %} {{ answer.question.title }}的回答 {% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'question/css/question.css' %}">
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="question_header">
+        <img src="{% static answer.question.user.profile.avatar %}" alt="" id="questioner_avatar">
+        <span id="questioner_name"> {% if answer.question.user.profile.nickname %}
+        {{ answer.question.user.profile.nickname }}
+        {% else %}
+        {{ answer.question.user.username }}
+        {% endif %}</span>
+    </div>
+    <div class="question_body">
+        <h1>{{ answer.question.title }}</h1>
+    </div>
+    <div>
+        <!--        在模板中运用ckeditor-->
+        <script src="{% static 'plugins/ckeditor/ckeditor/ckeditor.js' %}"></script>
+        <textarea class="form-control" id="body" name="body" rows="12">{{ article.body | safe }}</textarea>
+        <script>
+            CKEDITOR.replace( 'body' );
+        </script>
+        <input type="submit" class="form-control">
+    </div>
+</div>
+{% endblock %}
+{% block js%}
+{% endblock %}
